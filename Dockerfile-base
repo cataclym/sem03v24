@@ -1,4 +1,5 @@
 FROM ubuntu:24.04
+
 RUN apt-get update \
 && apt-get dist-upgrade -y \
 && apt-get autoremove -y \
@@ -8,7 +9,14 @@ sudo \
 nano \
 wget \
 curl \
-git
+git \
+build-essential \
+gcc \
+openjdk-21-jdk \
+mono-complete \
+python3 \
+strace \
+valgrind
 
 RUN useradd -G sudo -m -d /home/ole -s /bin/bash -p "$(openssl passwd -1 1234)" ole
 
@@ -20,7 +28,7 @@ RUN mkdir hacking \
 
 RUN git config --global user.email "user.email"
 RUN git config --global user.name "user.name"
-RUN git config --global url."https://pam:@github.com/".insteadOf"https://github.com"
+RUN git config --global url."https://pam:@github.com/".insteadOf "https://github.com"
 RUN mkdir -p github.com/uia-worker
 
 USER root
@@ -31,3 +39,7 @@ SHELL ["/bin/bash", "-c"]
 RUN mkdir -p $HOME/go/{src,bin}
 ENV GOPATH="/home/ole/go"
 ENV PATH="${PATH}:${GOPATH}/bin:/usr/local/go/bin"
+
+RUN curl --proto '=https' --tlsv1.3 https://sh.rustup.rs -sSf \
+| sh -s -- -y
+ENV PATH="${PATH}:${HOME}/.cargo/bin"

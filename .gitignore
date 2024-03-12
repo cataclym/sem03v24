@@ -20,3 +20,5 @@
 # !Makefile
 # ...even if they are in subdirectories
 !*/
+!SEM-II.md
+!image-*.png
