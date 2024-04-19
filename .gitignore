@@ -9,7 +9,7 @@
 !*.jpg
 !README.md
 !LICENSE
-!Dockerfile-base
+!Dockerfile-base*
 !*.c
 !*.java
 !*.h
@@ -20,5 +20,5 @@
 # !Makefile
 # ...even if they are in subdirectories
 !*/
-!SEM-II.md
+!SEM-*.md
 !*.png
